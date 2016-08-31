@@ -26,5 +26,10 @@ namespace SakeAppOsarai3
         {
             this.InitializeComponent();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            this.listView.Items.Add(this.textBox.Text);
+        }
     }
 }
