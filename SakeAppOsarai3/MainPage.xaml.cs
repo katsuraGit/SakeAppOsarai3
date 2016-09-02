@@ -12,7 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.Popups; 
+using Windows.UI.Popups;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -23,9 +24,18 @@ namespace SakeAppOsarai3
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public ObservableCollection<string> SakeCollection = new ObservableCollection<string>();
+
         public MainPage()
         {
             this.InitializeComponent();
+            this.Loaded += MainPage_Loaded;
+
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.listView.ItemsSource = SakeCollection; 
         }
 
         private async void button_Click(object sender, RoutedEventArgs e)
@@ -36,7 +46,8 @@ namespace SakeAppOsarai3
             }
             else
             {
-                this.listView.Items.Add(this.textBox.Text);
+                //                this.listView.Items.Add(this.textBox.Text);
+                this.SakeCollection.Add(this.textBox.Text); 
                 
             }
 
@@ -45,8 +56,14 @@ namespace SakeAppOsarai3
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.listView.Items.Remove(this.listView.SelectedValue);
-          //  this.listView.Items.Remove(this.listView.SelectedValue);
+            //  this.listView.Items.Remove(this.listView.SelectedValue);
+            //  this.listView.Items.Remove(this.listView.SelectedValue);
+             if (listView.SelectedIndex != -1 )
+            {
+                this.SakeCollection.RemoveAt(listView.SelectedIndex);
+            }
+           
+            
         }
     }
 }
