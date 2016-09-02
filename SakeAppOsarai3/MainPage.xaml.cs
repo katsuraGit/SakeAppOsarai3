@@ -50,30 +50,36 @@ namespace SakeAppOsarai3
             {
                 //                this.listView.Items.Add(this.textBox.Text);
                 this.SakeCollection.Add(this.textBox.Text);
-                // ファイルの定義
-                StorageFile file = await KnownFolders.PicturesLibrary.CreateFileAsync("sakedata.txt", CreationCollisionOption.ReplaceExisting);
-                // Stream処理
-                using (Stream ws = await file.OpenStreamForWriteAsync())
-                {
-                    DataContractSerializer sl = new DataContractSerializer(typeof(ObservableCollection<string>));
-// Write
-                    sl.WriteObject(ws, this.SakeCollection);
-                    // Flush
-                    await ws.FlushAsync();
-                }
-                
+                await SaveCollectionAsync();
+
             }
 
             //            this.listView.Items.Add(this.textBox.Text);
         }
 
-        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async System.Threading.Tasks.Task SaveCollectionAsync()
+        {
+            // ファイルの定義
+            StorageFile file = await KnownFolders.PicturesLibrary.CreateFileAsync("sakedata.txt", CreationCollisionOption.ReplaceExisting);
+            // Stream処理
+            using (Stream ws = await file.OpenStreamForWriteAsync())
+            {
+                DataContractSerializer sl = new DataContractSerializer(typeof(ObservableCollection<string>));
+                // Write
+                sl.WriteObject(ws, this.SakeCollection);
+                // Flush
+                await ws.FlushAsync();
+            }
+        }
+
+        private async void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //  this.listView.Items.Remove(this.listView.SelectedValue);
             //  this.listView.Items.Remove(this.listView.SelectedValue);
              if (listView.SelectedIndex != -1 )
             {
                 this.SakeCollection.RemoveAt(listView.SelectedIndex);
+                await this.SaveCollectionAsync(); 
             }
            
             
