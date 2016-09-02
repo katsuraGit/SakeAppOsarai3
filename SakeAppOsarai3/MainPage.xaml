@@ -11,7 +11,7 @@
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="20" Margin="138,10,0,0" TextWrapping="Wrap" Text="飲んだお酒アプリ" VerticalAlignment="Top" Width="136"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="11" Margin="19,47,0,0" TextWrapping="Wrap" Text="お酒の名前を入力してください" VerticalAlignment="Top" Width="303"/>
         <Button x:Name="button" Content="実行" HorizontalAlignment="Left" Height="32" Margin="340,47,0,0" VerticalAlignment="Top" Width="87" Click="button_Click"/>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="163" Margin="19,105,0,0" VerticalAlignment="Top" Width="408"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="163" Margin="19,105,0,0" VerticalAlignment="Top" Width="408" SelectionChanged="listView_SelectionChanged"/>
 
     </Grid>
 </Page>

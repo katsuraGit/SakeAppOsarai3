@@ -30,17 +30,23 @@ namespace SakeAppOsarai3
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
-            if ( this.textBox.Text != "お酒の名前を入力してください" ) 
-                {
-                this.listView.Items.Add(this.textBox.Text);
-               
-                 }
-                 else
+            if ( this.textBox.Text == "お酒の名前を入力してください" )
             {
                 await new MessageDialog("ちゃんと入力してね！").ShowAsync();
             }
+            else
+            {
+                this.listView.Items.Add(this.textBox.Text);
+                
+            }
 
             //            this.listView.Items.Add(this.textBox.Text);
+        }
+
+        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.listView.Items.Remove(this.listView.SelectedValue);
+          //  this.listView.Items.Remove(this.listView.SelectedValue);
         }
     }
 }
