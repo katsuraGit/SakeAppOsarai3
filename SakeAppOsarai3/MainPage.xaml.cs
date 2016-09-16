@@ -35,8 +35,14 @@ namespace SakeAppOsarai3
 
         }
 
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+
+            using (Stream rs = await KnownFolders.PicturesLibrary.OpenStreamForReadAsync("sakedata.txt"))
+            {
+                DataContractSerializer sl = new DataContractSerializer(typeof(ObservableCollection<string>));
+                SakeCollection = (ObservableCollection<string>)sl.ReadObject(rs);
+            }
             this.listView.ItemsSource = SakeCollection; 
         }
 
